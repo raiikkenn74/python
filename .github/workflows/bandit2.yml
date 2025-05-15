@@ -1,0 +1,20 @@
+name: Bandit Scan
+
+on: [push, pull_request]
+
+jobs:
+  bandit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      
+      - name: Install Bandit
+        run: pip install bandit
+      
+      - name: Run Bandit Scan
+        run: bandit -r . -ll
